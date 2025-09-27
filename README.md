@@ -15,8 +15,8 @@
   .floating-text {
     position: absolute;
     color: #ff69b4;
-    font-size: 3em;
-    text-shadow: 0 0 25px #ff00ff;
+    font-size: 5vw; /* ขนาด responsive ตามความกว้างหน้าจอ */
+    text-shadow: 0 0 15px #ff00ff;
     pointer-events: none;
     white-space: nowrap;
     user-select: none;
@@ -27,7 +27,7 @@
     width: 20px;
     height: 20px;
     background: red;
-    transform: rotate(45deg);
+    transform: rotate(0deg); /* แนวตั้ง */
   }
   .heart:before, .heart:after {
     content: "";
@@ -40,8 +40,8 @@
   .heart:before { top: -50%; left: 0; }
   .heart:after { top: 0; left: 50%; }
   @keyframes float {
-    0% { transform: translateY(100vh) translateX(0) rotate(45deg); opacity: 1; }
-    100% { transform: translateY(-10vh) translateX(var(--x)) rotate(45deg); opacity: 0; }
+    0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-10vh) translateX(var(--x)) rotate(0deg); opacity: 0; }
   }
 </style>
 </head>
@@ -66,11 +66,9 @@ function createHeart() {
   heart.style.width = heart.style.height = size + "px";
   const color = colors[Math.floor(Math.random() * colors.length)];
   heart.style.background = color;
-  heart.style.setProperty('--before-color', color);
-  heart.style.setProperty('--after-color', color);
   const duration = 3 + Math.random() * 5;
   heart.style.animation = `float ${duration}s linear forwards`;
-  const xOffset = (Math.random() - 0.5) * 100;
+  const xOffset = (Math.random() - 0.5) * 50;
   heart.style.setProperty('--x', xOffset + "px");
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), duration * 1000);
@@ -86,8 +84,8 @@ function createFloatingText() {
   text.style.top = Math.random() * 80 + "vh";
   document.body.appendChild(text);
 
-  const dx = (Math.random() - 0.5) * 1.5;
-  const dy = (Math.random() - 0.5) * 1.5;
+  const dx = (Math.random() - 0.5) * 1.2;
+  const dy = (Math.random() - 0.5) * 1.2;
   let x = parseFloat(text.style.left);
   let y = parseFloat(text.style.top);
 
@@ -106,7 +104,6 @@ function createFloatingText() {
   }, 6000);
 }
 
-// เริ่มสร้างหัวใจและข้อความ
 setInterval(createHeart, 300);
 setInterval(createFloatingText, 500);
 </script>
